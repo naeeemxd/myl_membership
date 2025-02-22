@@ -1,47 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:myl_membership/model/members_Model.dart';
+import 'dart:io';
 
-class MemberProvider extends ChangeNotifier {
-  MemberModel _member = MemberModel();
+class MemberRegistrationProvider extends ChangeNotifier {
+  final TextEditingController voterIdController = TextEditingController();
+  final TextEditingController membershipController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController mobileController = TextEditingController();
+  final TextEditingController fatherNameController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController districtController = TextEditingController();
+  final TextEditingController dobController = TextEditingController();
+  final TextEditingController ageController = TextEditingController();
+  final TextEditingController bloodController = TextEditingController();
 
-  MemberModel get member => _member;
+  File? imageFile;
+  final _picker = ImagePicker();
 
-  final ImagePicker _picker = ImagePicker();
+  final List<String> bloodGroups = [
+    "A+",
+    "A-",
+    "B+",
+    "B-",
+    "O+",
+    "O-",
+    "AB+",
+    "AB-",
+  ];
 
-  void updateField(String field, String value) {
-    switch (field) {
-      case 'voterId':
-        _member.voterId = value;
-        break;
-      case 'membershipNumber':
-        _member.membershipNumber = value;
-        break;
-      case 'name':
-        _member.name = value;
-        break;
-      case 'mobile':
-        _member.mobile = value;
-        break;
-      case 'fatherName':
-        _member.fatherName = value;
-        break;
-      case 'address':
-        _member.address = value;
-        break;
-      case 'district':
-        _member.district = value;
-        break;
-      case 'dob':
-        _member.dob = value;
-        break;
-      case 'age':
-        _member.age = value;
-        break;
-      case 'bloodGroup':
-        _member.bloodGroup = value;
-        break;
-    }
+  String? selectedBloodGroup;
+
+  void setBloodGroup(String bloodGroup) {
+    selectedBloodGroup = bloodGroup;
+
     notifyListeners();
   }
 
@@ -49,38 +40,62 @@ class MemberProvider extends ChangeNotifier {
     try {
       final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
       if (image != null) {
-        _member.imagePath = image.path;
+        imageFile = File(image.path);
         notifyListeners();
       }
     } catch (e) {
       debugPrint('Error picking image: $e');
+      throw Exception('Failed to pick image: $e');
     }
   }
 
-  void pickDate(BuildContext context) async {
-    final pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
+  Future<void> pickDate(BuildContext context) async {
+    try {
+      final pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1900),
+        lastDate: DateTime.now(),
+      );
 
-    if (pickedDate != null) {
-      int age = DateTime.now().year - pickedDate.year;
-      if (DateTime.now().month < pickedDate.month ||
-          (DateTime.now().month == pickedDate.month &&
-              DateTime.now().day < pickedDate.day)) {
-        age--;
+      if (pickedDate != null) {
+        final age = calculateAge(pickedDate);
+        dobController.text =
+            "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+        ageController.text = age.toString();
+        notifyListeners();
       }
-
-      _member.dob = "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
-      _member.age = age.toString();
-      notifyListeners();
+    } catch (e) {
+      throw Exception('Failed to pick date: $e');
     }
   }
 
-  void reset() {
-    _member = MemberModel();
+  int calculateAge(DateTime birthDate) {
+    final today = DateTime.now();
+    int age = today.year - birthDate.year;
+    if (today.month < birthDate.month ||
+        (today.month == birthDate.month && today.day < birthDate.day)) {
+      age--;
+    }
+    return age;
+  }
+
+  void saveMember() {
+    // Implement save logic
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    voterIdController.dispose();
+    membershipController.dispose();
+    nameController.dispose();
+    mobileController.dispose();
+    fatherNameController.dispose();
+    addressController.dispose();
+    districtController.dispose();
+    dobController.dispose();
+    ageController.dispose();
+    super.dispose();
   }
 }

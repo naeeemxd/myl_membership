@@ -35,6 +35,7 @@ class _MembersScreenState extends State<MembersScreen> {
     return Scaffold(
       appBar: const MainAppBar(title: 'Members'),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -120,7 +121,7 @@ class _MembersScreenState extends State<MembersScreen> {
             SizedBox(height: 10),
             //registerd
             Padding(
-              padding: const EdgeInsets.only(left: 14.0, right: 18),
+              padding: const EdgeInsets.only(left: 17.0, right: 18),
               child: Row(
                 children: [
                   Container(
@@ -311,55 +312,64 @@ class ProfileCard extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => YourNewScreen(),
-        //   ),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MemberRegistration()),
+        );
       },
       child: Card(
         elevation: 3,
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        margin: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 4,
+        ), // Reduce vertical margin
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ), // Slightly smaller radius
         child: Container(
           width: screenWidth > 400 ? 350 : screenWidth * 0.9,
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 10,
+          ), // Reduce padding
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                color: Colors.black26, // Shadow color
-                blurRadius: 3, // Blur radius
+                color: Colors.black26,
+                blurRadius: 2, // Slightly less blur
               ),
             ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min, // Reduce unnecessary space
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CircleAvatar(
-                    radius: 30,
+                    radius: 25, // Reduce size
                     backgroundImage: NetworkImage(imageUrl),
                   ),
-                  const SizedBox(width: 16),
+                  const SizedBox(
+                    width: 12,
+                  ), // Reduce space between avatar and text
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         name,
                         style: const TextStyle(
-                          fontSize: 20,
+                          fontSize: 18, // Reduce font size slightly
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
                         phoneNumber,
                         style: const TextStyle(
-                          fontSize: 14,
+                          fontSize: 13,
                           color: Colors.black54,
                         ),
                       ),
@@ -374,11 +384,12 @@ class ProfileCard extends StatelessWidget {
                               ? Colors.red
                               : Colors.green.shade900,
                       fontWeight: FontWeight.bold,
+                      fontSize: 14, // Slightly smaller
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 10), // Reduce spacing
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -390,7 +401,7 @@ class ProfileCard extends StatelessWidget {
                       buildInfoText("Unit"),
                     ],
                   ),
-                  const SizedBox(width: 50),
+                  const SizedBox(width: 40), // Reduce spacing
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -401,11 +412,11 @@ class ProfileCard extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 10), // Reduce spacing
               Row(
                 children: [
                   buildTag("Age", age),
-                  const SizedBox(width: 55),
+                  const SizedBox(width: 40), // Reduce spacing
                   buildTag("Blood", bloodGroup),
                 ],
               ),

@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myl_membership/committee.dart';
+import 'package:myl_membership/councillor.dart';
 import 'package:myl_membership/membersscrn.dart';
 
 void main() {
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     const MembersScreen(),
-    Center(child: Text("Councilors Page", style: TextStyle(fontSize: 20))),
+    CouncilorsScreen(),
     CommitteePage(),
   ];
 
@@ -88,5 +89,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-

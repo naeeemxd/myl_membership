@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myl_membership/provider/blood_group_provider.dart';
+import 'package:myl_membership/provider/member_provider.dart';
+import 'package:myl_membership/provider/provider.dart';
+import 'package:myl_membership/provider/search_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:myl_membership/login.dart';
 
@@ -15,7 +18,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => BloodGroupProvider()),
+        ChangeNotifierProvider(create: (_) => BloodGroupProvider()),
+        ChangeNotifierProvider(create: (_) => MemberRegistrationProvider()),
+        ChangeNotifierProvider(create: (_) => CouncilorProvider()),
+        ChangeNotifierProvider(create: (_) => SearchProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

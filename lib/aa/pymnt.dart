@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class PaymentFailureScreen extends StatelessWidget {
-  const PaymentFailureScreen({Key? key}) : super(key: key);
+  const PaymentFailureScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

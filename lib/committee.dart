@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myl_membership/add_exiecutive.dart';
 import 'package:myl_membership/cirtificate.dart';
 import 'package:myl_membership/cutom_widget/appbar.dart';
 
@@ -130,7 +131,14 @@ class CommitteePage extends StatelessWidget {
                       IconButton(
                         icon: const Icon(Icons.add_circle_outline),
                         color: Colors.green,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AddExecutive(),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),

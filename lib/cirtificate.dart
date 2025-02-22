@@ -41,7 +41,7 @@ class CertificateCard extends StatelessWidget {
 
         backgroundColor: Colors.black,
         title: const Text(
-          'Affiliate Certificate',
+          'Affiliate Certificateee',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
         ),
         centerTitle: true,

@@ -56,7 +56,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
 class PaymentAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
-  const PaymentAppBar({Key? key, required this.title}) : super(key: key);
+  const PaymentAppBar({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +115,7 @@ class CustomAppBarPayment extends StatelessWidget
     implements PreferredSizeWidget {
   final String title;
 
-  const CustomAppBarPayment({Key? key, required this.title}) : super(key: key);
+  const CustomAppBarPayment({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
