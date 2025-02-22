@@ -1,15 +1,12 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class PaymentSuccessScreen extends StatelessWidget {
-  const PaymentSuccessScreen({Key? key}) : super(key: key);
+class PaymentFailureScreen extends StatelessWidget {
+  const PaymentFailureScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
         centerTitle: true,
@@ -38,45 +35,81 @@ class PaymentSuccessScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 200,
-              height: 200,
-              decoration: BoxDecoration(
-                // color: Colors.green,
+              width: 60,
+              height: 60,
+              decoration: const BoxDecoration(
+                color: Color(0xFFE83C3C),
                 shape: BoxShape.circle,
               ),
-              child: FutureBuilder(
-                future: Future.delayed(
-                  Duration(seconds: 1),
-                ), // Delay of 2 seconds
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return Image.network(
-                      "https://s3-alpha-sig.figma.com/img/2b19/5925/79f9121061e4b91795809499eed1673b?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=mPUaI4mKt397XBalniHiq9XIDGHVOoIy7DKi-ycV6OZ6TctRTTATFVQaLGC~3ZWOKNrc9RowaawuZJAqfE9neWuL4kti3e6ufrHaP3njITem88Wcyq4Ubb56WZaoDdVEC17uyNj4HYFVsX7moTtUhNkrsy1D30EbLyGqSjGGW4i3-S5GLNT7d3BX8HpA8AX8b0qVQNfaPxER8vK9u8P6Ec4UVyp-lGcbTdSfvaHOiZlG5r0GJOEODfkKXN94ua6JhazB81V51c8rTNXenMdDbFdAneQtmWtbwc19E5BBI3jZ6EELCehnfL55ecrsbZSBZQMVH1AQyulxPOvUXa6t0g__",
-                      fit: BoxFit.cover,
-                    );
-                  } else {
-                    return CircularProgressIndicator(); // Show loading indicator while waiting
-                  }
-                },
+              child: Image.asset(
+                "assets/images/payment_images/paymentfaild.gif",
+                width: 100,
+                height: 100,
+                // fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 20),
             const Text(
-              'Payment Success!',
+              'Payment Failed',
               style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
               ),
             ),
             const SizedBox(height: 8),
-            const Text(
-              'We have received your payment.',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40),
+              child: Text(
+                'Something went wrong. We couldn\'t process your payment. Contact our support if you have lost money.',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 14, color: Colors.grey),
+              ),
             ),
-            const Text(
-              'Thankyou',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
+            const SizedBox(height: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                OutlinedButton(
+                  onPressed: () {
+                    // Add support action here
+                  },
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
+                    ),
+                    side: const BorderSide(color: Color(0xFFFF3B30)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text(
+                    'Support',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    // Add retry action here
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
+                    ),
+                    backgroundColor: const Color(0xFFFF3B30),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text(
+                    'Try Again',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

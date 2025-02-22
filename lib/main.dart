@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myl_membership/provider/blood_group_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:myl_membership/login.dart';
 
 void main() {
@@ -11,20 +13,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        primarySwatch: Colors.green,
-        textTheme: GoogleFonts.poppinsTextTheme(
-          Theme.of(context).textTheme, // Merge with the existing text theme
-        ).apply(
-          bodyColor: Colors.black, // Set default text color
-          displayColor:
-              Colors.black, // Set display text color (headlines, etc.)
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => BloodGroupProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'MYL Membership', // Add a title for better app identification
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+          primarySwatch: Colors.green,
+          textTheme: GoogleFonts.poppinsTextTheme(
+            Theme.of(context).textTheme,
+          ).apply(bodyColor: Colors.black, displayColor: Colors.black),
         ),
+        home: const LoginScreen(),
+        routes: {
+          '/login': (context) => const LoginScreen(),
+          // Add more routes if needed
+        },
       ),
-      home: const LoginScreen(),
     );
   }
 }

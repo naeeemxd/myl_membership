@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myl_membership/payment/selectPayment.dart';
+import 'package:myl_membership/cutom_widget/appbar.dart';
+import 'package:myl_membership/membrreg.dart';
 
 class Voterid extends StatelessWidget {
   const Voterid({super.key});
@@ -7,14 +8,7 @@ class Voterid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Member Registration',
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-      ),
+      appBar: const PaymentAppBar(title: "Member Registration"),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
@@ -46,7 +40,9 @@ class Voterid extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PaymentScreen()),
+                    MaterialPageRoute(
+                      builder: (context) => MemberRegistration(),
+                    ),
                   );
                 },
                 style: ElevatedButton.styleFrom(

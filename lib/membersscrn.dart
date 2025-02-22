@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:myl_membership/cutom_widget/appbar.dart';
 import 'package:myl_membership/dummy.dart';
 import 'package:myl_membership/membrreg.dart';
+import 'package:myl_membership/voterid.dart';
 
 class MembersScreen extends StatefulWidget {
   const MembersScreen({super.key});
@@ -31,14 +33,7 @@ class _MembersScreenState extends State<MembersScreen> {
             .toList();
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text(
-          'Members',
-          style: TextStyle(color: Colors.black, fontSize: 18),
-        ),
-      ),
+      appBar: const MainAppBar(title: 'Members'),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,9 +98,7 @@ class _MembersScreenState extends State<MembersScreen> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => MemberRegistration(),
-                          ),
+                          MaterialPageRoute(builder: (context) => Voterid()),
                         );
                       },
                       child: Row(
@@ -414,15 +407,6 @@ class ProfileCard extends StatelessWidget {
                   buildTag("Age", age),
                   const SizedBox(width: 55),
                   buildTag("Blood", bloodGroup),
-                  // const Spacer(),
-                  // Text(
-                  //   status,
-                  //   style: TextStyle(
-                  //     color:
-                  //         status == 'Unpaid' ? Colors.red : Colors.green.shade900,
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  // ),
                 ],
               ),
             ],

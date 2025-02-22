@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:myl_membership/cutom_widget/appbar.dart';
+import 'package:myl_membership/payment/selectPayment.dart';
+import 'package:myl_membership/provider/blood_group_provider.dart';
 import 'dart:io';
 
 import 'package:myl_membership/voterid.dart';
+import 'package:provider/provider.dart';
 
 class MemberRegistration extends StatefulWidget {
-  const MemberRegistration({super.key});
+  MemberRegistration({Key? key}) : super(key: key);
 
   @override
   State<MemberRegistration> createState() => _MemberRegistrationState();
 }
 
 class _MemberRegistrationState extends State<MemberRegistration> {
+  final List<String> bloodGroups = [
+    "A+",
+    "A-",
+    "B+",
+    "B-",
+    "O+",
+    "O-",
+    "AB+",
+    "AB-",
+  ];
+
   // Controllers
   final _voterIdController = TextEditingController();
   final _membershipController = TextEditingController();
@@ -120,20 +136,7 @@ class _MemberRegistrationState extends State<MemberRegistration> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: const BackButton(color: Colors.black),
-        title: const Text(
-          'Member Registration',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        centerTitle: true,
-      ),
+      appBar: const PaymentAppBar(title: "Member Registration"),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -193,6 +196,17 @@ class _MemberRegistrationState extends State<MemberRegistration> {
                     controller: _dobController,
                     readOnly: true,
                     decoration: InputDecoration(
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.all(
+                          8.0,
+                        ), // Adjust padding as needed
+                        child: SvgPicture.asset(
+                          "assets/logo/calander.svg",
+                          height: 24,
+                          width: 24,
+                        ),
+                      ),
+
                       labelText: 'DOB',
                       labelStyle: TextStyle(color: Colors.grey[600]),
                       border: OutlineInputBorder(
@@ -250,7 +264,54 @@ class _MemberRegistrationState extends State<MemberRegistration> {
 
             const SizedBox(height: 16),
 
-            _buildTextField(_bloodGroupController, 'Blood Group'),
+            // _buildTextField(_bloodGroupController, 'Blood Group'),
+            //  const SizedBox(width: 16),
+            Consumer<BloodGroupProvider>(
+              builder: (context, provider, child) {
+                return TextField(
+                  controller:
+                      provider.textController, // Use provider's controller
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    suffixIcon: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        value: provider.selectedBloodGroup,
+                        icon: Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: SvgPicture.asset(
+                            "assets/logo/arrow-down-01.svg",
+                            height: 24,
+                            width: 24,
+                          ),
+                        ),
+                        onChanged: (String? newValue) {
+                          if (newValue != null) {
+                            provider.setBloodGroup(newValue);
+                          }
+                        },
+                        items:
+                            bloodGroups.map((String group) {
+                              return DropdownMenuItem<String>(
+                                value: group,
+                                child: Text(group),
+                              );
+                            }).toList(),
+                      ),
+                    ),
+                    labelText: 'Blood Group',
+                    hintText:
+                        provider.selectedBloodGroup ?? "Select Blood Group",
+                    labelStyle: TextStyle(color: Colors.grey[600]),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey[100],
+                  ),
+                );
+              },
+            ),
 
             const SizedBox(height: 32),
 
@@ -288,7 +349,9 @@ class _MemberRegistrationState extends State<MemberRegistration> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Voterid()),
+                          MaterialPageRoute(
+                            builder: (context) => PaymentScreen(),
+                          ),
                         );
                       },
                       style: ElevatedButton.styleFrom(

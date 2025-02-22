@@ -19,7 +19,6 @@ class CertificateCard extends StatelessWidget {
       appBar: AppBar(
         leading: GestureDetector(
           onTap: () {
-            // Navigate back to the previous screen
             Navigator.of(context).pop();
           },
           child: Transform.scale(
@@ -29,9 +28,12 @@ class CertificateCard extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: Colors.white30,
               ),
-              child: SvgPicture.asset(
-                "assets/logo/back_arrow.svg",
-                color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 6.0, top: 6, bottom: 6),
+                child: SvgPicture.asset(
+                  "assets/logo/back_arrow.svg",
+                  color: Colors.white,
+                ),
               ),
             ),
           ),

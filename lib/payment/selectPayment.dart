@@ -10,27 +10,32 @@ class PaymentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
-
-      appBar: AppBar(
-        surfaceTintColor: Colors.transparent,
-        centerTitle: true,
-        backgroundColor: Color(0xFFFFFFFF),
-        elevation: 2,
-        shadowColor: Colors.white70,
-        leading: IconButton(
-          icon: SvgPicture.asset(
-            "assets/logo/back_arrow.svg",
-            width: 25,
-            height: 25,
-          ),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: const Text(
-          'Payment',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(80),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 18.0),
+          child: AppBar(
+            surfaceTintColor: Colors.transparent,
+            centerTitle: true,
+            backgroundColor: Color(0xFFFFFFFF),
+            elevation: 2,
+            shadowColor: Colors.white70,
+            leading: IconButton(
+              icon: SvgPicture.asset(
+                "assets/logo/back_arrow.svg",
+                width: 25,
+                height: 25,
+              ),
+              onPressed: () => Navigator.pop(context),
+            ),
+            title: const Text(
+              'Payment',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           ),
         ),
       ),
@@ -39,7 +44,7 @@ class PaymentScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 50),
+            SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.only(left: 10.0),
               child: const Text(
@@ -121,7 +126,7 @@ class PaymentMethodTile extends StatelessWidget {
         title,
         style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
       ),
-      trailing: const Icon(Icons.chevron_right, color: Color(0x80434343)),
+      trailing: const Icon(Icons.chevron_right, color: Colors.black),
       onTap: onTap,
     );
   }

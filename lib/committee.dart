@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myl_membership/cirtificate.dart';
+import 'package:myl_membership/cutom_widget/appbar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,19 +37,7 @@ class CommitteePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: Image.asset("assets/images/logo4x.png"),
-          onPressed: () {},
-        ),
-        title: Text(
-          'Add Councilor',
-          style: TextStyle(fontWeight: FontWeight.w500),
-        ),
-        centerTitle: true,
-      ),
+      appBar: MainAppBar(title: "Committee"),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -108,7 +97,7 @@ class CommitteePage extends StatelessWidget {
                   ),
                   Divider(),
                   const SizedBox(height: 12),
-                  Row(
+                  Wrap(
                     children: [
                       _buildMemberCard(
                         'Nahid Azad',
@@ -116,10 +105,15 @@ class CommitteePage extends StatelessWidget {
                         'https://tse2.mm.bing.net/th?id=OIP.ca7V0f3w55L-EOAqZqAFhAHaE8&pid=Api&P=0&h=220',
                       ),
                       _buildMemberCard(
-                        'Shafiq',
+                        'mohammed Shafiq',
                         'Malappuram',
                         'https://tse2.mm.bing.net/th?id=OIP.ca7V0f3w55L-EOAqZqAFhAHaE8&pid=Api&P=0&h=220',
                       ),
+                      // _buildMemberCard(
+                      //   'mohammed Shafiq',
+                      //   'Malappuram',
+                      //   'https://tse2.mm.bing.net/th?id=OIP.ca7V0f3w55L-EOAqZqAFhAHaE8&pid=Api&P=0&h=220',
+                      // ),
                     ],
                   ),
                   const SizedBox(height: 12),

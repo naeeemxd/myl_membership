@@ -1,21 +1,27 @@
-class Member {
-  final String name;
-  final String phoneNumber;
-  final String district;
-  final String panchayath;
-  final String unit;
-  final String age;
-  final String bloodGroup;
-  final String status;
+class MemberModel {
+  String voterId;
+  String membershipNumber;
+  String name;
+  String mobile;
+  String fatherName;
+  String address;
+  String district;
+  String dob;
+  String age;
+  String bloodGroup;
+  String? imagePath;
 
-  Member({
-    required this.name,
-    required this.phoneNumber,
-    required this.district,
-    required this.panchayath,
-    required this.unit,
-    required this.age,
-    required this.bloodGroup,
-    required this.status,
+  MemberModel({
+    this.voterId = '',
+    this.membershipNumber = '',
+    this.name = '',
+    this.mobile = '',
+    this.fatherName = '',
+    this.address = '',
+    this.district = '',
+    this.dob = '',
+    this.age = '',
+    this.bloodGroup = '',
+    this.imagePath,
   });
 }
