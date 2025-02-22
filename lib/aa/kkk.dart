@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:myl_membership/dummy.dart';
-import 'package:myl_membership/membrreg.dart';
+import 'package:myl_membership/Members/membrreg.dart';
 
 class MembersScreen extends StatefulWidget {
   const MembersScreen({super.key});

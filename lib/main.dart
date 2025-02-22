@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myl_membership/provider/Executive_Provider.dart';
 import 'package:myl_membership/provider/blood_group_provider.dart';
-import 'package:myl_membership/provider/member_provider.dart';
+import 'package:myl_membership/provider/memberregstrn_provider.dart';
+import 'package:myl_membership/provider/membrsScreen_provider.dart';
 import 'package:myl_membership/provider/provider.dart';
 import 'package:myl_membership/provider/search_provider.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MemberRegistrationProvider()),
         ChangeNotifierProvider(create: (_) => CouncilorProvider()),
         ChangeNotifierProvider(create: (_) => SearchProvider()),
+        ChangeNotifierProvider(create: (_) => MembersProvider()),
+        ChangeNotifierProvider(create: (_) => ExecutiveProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

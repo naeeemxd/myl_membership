@@ -1,9 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:myl_membership/committee.dart';
-import 'package:myl_membership/councillor.dart';
-import 'package:myl_membership/membersscrn.dart';
+import 'package:myl_membership/Committee/committee.dart';
+import 'package:myl_membership/Councilors/councillor.dart';
+import 'package:myl_membership/Members/membersscrn.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -22,7 +22,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
 
   final List<Widget> _pages = [
     MembersScreen(),
